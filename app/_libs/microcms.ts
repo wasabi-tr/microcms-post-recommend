@@ -47,4 +47,3 @@ export const getBlogDetail = async (contentId: string) => {
 	})
 	return blog
 }
-

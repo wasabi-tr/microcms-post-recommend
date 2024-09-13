@@ -34,17 +34,14 @@ export default async function Page({
 	// キーワードを取得
 	const { keyword } = blog
 
+	// 手動で設定したコンテンツを取得
+	const { pickup } = blog
+
 	// qパラメータで全フィールドを対象にキーワード検索
 	const { contents: relatedContentsByQ } = await getBlogsByKeyword({
 		limit: 3,
 		q: keyword,
 		filters: `id[not_equals]${slug}`,
-	})
-
-	// filtersパラメータで特定のを対象にキーワード検索
-	const { contents: relatedContentsByFilters } = await getBlogsByKeyword({
-		limit: 3,
-		filters: `id[not_equals]${slug}[and]content[contains]${keyword}`,
 	})
 
 	// filtersパラメータで同じカテゴリのブログを取得
@@ -60,11 +57,8 @@ export default async function Page({
 
 			{/* 関連記事を出力するコンポーネント */}
 			<div className='grid gap-2 h-max'>
-				<Recommend
-					contents={relatedContentsByFilters}
-					title='filtersパラメータ'
-				/>
-				<Recommend contents={relatedContentsByQ} title='qパラメータ' />
+				<Recommend contents={pickup} title='ピックアップ' />
+				<Recommend contents={relatedContentsByQ} title='関連記事' />
 				<Recommend
 					contents={relatedContentsByCategory}
 					title={blog.category.name}

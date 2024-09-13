@@ -11,6 +11,7 @@ export type Blog = {
 	eyecatch: MicroCMSImage
 	category: Category
 	keyword: string
+	pickup: Blog[]
 } & MicroCMSContentId &
 	MicroCMSDate
 
@@ -18,7 +19,3 @@ export type Category = {
 	name: string
 } & MicroCMSContentId &
 	MicroCMSDate
-
-export type Pickup = {
-	pickup: Blog[]
-} & MicroCMSDate
